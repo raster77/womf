@@ -1,8 +1,8 @@
 #define STB_VORBIS_HEADER_ONLY
-#include "miniaudio/stb_vorbis.c"
-
-#include "AudioStream.hpp"
-#include "FileMagicNumber.hpp"
+#include "womf/miniaudio/stb_vorbis.c"
+#undef STB_VORBIS_HEADER_ONLY
+#include "womf/AudioStream.hpp"
+#include "womf/FileMagicNumber.hpp"
 #include <algorithm>
 #include <filesystem>
 #include <fstream>

@@ -2,12 +2,15 @@
 #define MA_NO_GENERATION
 
 #define STB_VORBIS_HEADER_ONLY
-#include "miniaudio/stb_vorbis.c"
+#include "womf/miniaudio/stb_vorbis.c"
 
 #define MINIAUDIO_IMPLEMENTATION
-#include "miniaudio/miniaudio.h"
+#include "womf/miniaudio/miniaudio.h"
 
-#include "AudioResource.hpp"
+#undef STB_VORBIS_HEADER_ONLY
+#include "womf/miniaudio/stb_vorbis.c"
+
+#include "womf/AudioResource.hpp"
 #include <stdexcept>
 #include <memory>
 #include <atomic>
