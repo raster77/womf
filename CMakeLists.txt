@@ -9,7 +9,6 @@ macro(set_option var default type docstring)
 endmacro()
 
 file(GLOB WOMF_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/womf/*.cpp")
-
 set_option(BUILD_EXAMPLE TRUE BOOL "TRUE to build the example, FALSE to ignore")
 
 if(NOT WOMF_INCLUDE_DIR)
@@ -17,7 +16,6 @@ if(NOT WOMF_INCLUDE_DIR)
 endif()
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-
 add_compile_definitions(WOMF_STATIC)
 add_library(womf-static STATIC ${WOMF_SRC})
 target_include_directories(womf-static PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/${WOMF_INCLUDE_DIR})
@@ -25,7 +23,13 @@ target_link_libraries(womf-static ${OPT})
 
 if(BUILD_EXAMPLE)
 	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/example)
-	add_executable(womf example/womftest.cpp)
-	target_include_directories(womf PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/${WOMF_INCLUDE_DIR})
-	target_link_libraries(womf PRIVATE womf-static)
+	add_executable(example example/example.cpp)
+	link_directories(${CMAKE_BINARY_DIR}/lib)
+	target_include_directories(example PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/${WOMF_INCLUDE_DIR})
+	if(UNIX)
+		target_link_libraries(example womf-static pthread dl)
+	endif(UNIX)
+	if(WIN32)
+		target_link_libraries(example womf-static)
+	endif(WIN32)
 endif()
