@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
 
   if (argc != 2) {
     std::cout << "No audio file to play" << std::endl;
-    std::cout << "usage: womf filetoplay" << std::endl;
+    std::cout << "usage: " << argv[0] << " filetoplay" << std::endl;
     return 0;
   }
 
